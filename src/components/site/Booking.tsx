@@ -71,7 +71,32 @@ const Booking = () => {
             <div className="mt-8 space-y-4">
               <InfoCard icon={MapPin} title="Visit Us" text="Options Arcade, Main Road, PWD, Islamabad, 44000" />
               <InfoCard icon={Phone} title="Call Us" text="0333 5299143" href="tel:+923335299143" />
-              <InfoCard icon={Clock} title="Open Hours" text="Wed – Tue: 5:00 PM – 8:30 PM · Sunday Closed" />
+              <div className="p-5 rounded-2xl bg-card-gradient border border-border/60 shadow-soft">
+                <div className="flex items-start gap-4">
+                  <div className="w-12 h-12 rounded-xl bg-hero-gradient grid place-items-center text-primary-foreground flex-shrink-0">
+                    <Clock className="w-5 h-5" />
+                  </div>
+                  <div className="flex-1">
+                    <div className="font-semibold text-primary-deep">Opening Hours</div>
+                    <ul className="mt-3 space-y-1.5 text-sm">
+                      {[
+                        ["Monday", "5:00 – 8:30 PM"],
+                        ["Tuesday", "5:00 – 8:30 PM"],
+                        ["Wednesday", "5:00 – 8:30 PM"],
+                        ["Thursday", "5:00 – 8:30 PM"],
+                        ["Friday", "5:00 – 8:30 PM"],
+                        ["Saturday", "5:00 – 8:30 PM"],
+                        ["Sunday", "Closed"],
+                      ].map(([day, time]) => (
+                        <li key={day} className="flex justify-between gap-4">
+                          <span className="text-muted-foreground">{day}</span>
+                          <span className={time === "Closed" ? "text-accent font-semibold" : "text-primary-deep font-medium"}>{time}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
 

@@ -31,12 +31,22 @@ const Footer = () => (
         </div>
 
         <div>
-          <h4 className="font-semibold mb-4">Quick Links</h4>
-          <ul className="space-y-2 text-sm text-primary-foreground/70">
-            <li><a href="#services" className="hover:text-primary-foreground">Services</a></li>
-            <li><a href="#doctor" className="hover:text-primary-foreground">Our Dentist</a></li>
-            <li><a href="#reviews" className="hover:text-primary-foreground">Reviews</a></li>
-            <li><a href="#book" className="hover:text-primary-foreground">Book Appointment</a></li>
+          <h4 className="font-semibold mb-4">Opening Hours</h4>
+          <ul className="space-y-1.5 text-sm text-primary-foreground/70">
+            {[
+              ["Monday", "5:00 – 8:30 PM"],
+              ["Tuesday", "5:00 – 8:30 PM"],
+              ["Wednesday", "5:00 – 8:30 PM"],
+              ["Thursday", "5:00 – 8:30 PM"],
+              ["Friday", "5:00 – 8:30 PM"],
+              ["Saturday", "5:00 – 8:30 PM"],
+              ["Sunday", "Closed"],
+            ].map(([day, time]) => (
+              <li key={day} className="flex justify-between gap-4">
+                <span>{day}</span>
+                <span className={time === "Closed" ? "text-accent font-medium" : "text-primary-foreground/90"}>{time}</span>
+              </li>
+            ))}
           </ul>
           <div className="flex gap-3 mt-5">
             <a href="#" aria-label="Instagram" className="w-9 h-9 rounded-full bg-white/10 hover:bg-white/20 grid place-items-center transition-colors"><Instagram className="w-4 h-4" /></a>
