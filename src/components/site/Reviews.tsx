@@ -16,6 +16,21 @@ const reviews = [
     text: "My overall experience with Denticare has been excellent. Dr. Omer is extremely humble and cooperative — truly one of the best! I didn't feel any pain even after my extractions. Highly recommended!",
     when: "9 months ago",
   },
+  {
+    name: "Sana Ahmed",
+    text: "Beautiful clinic and very modern equipment. Dr. Omer explained every step before starting. My whitening results are amazing — couldn't be happier!",
+    when: "5 months ago",
+  },
+  {
+    name: "Bilal Khan",
+    text: "Got my crown done here. The fit and finish are perfect, and the team is genuinely caring. Worth every rupee.",
+    when: "4 months ago",
+  },
+  {
+    name: "Ayesha Malik",
+    text: "Took my daughter for her first dental visit. The staff was so gentle and patient with her. Highly recommended for kids too!",
+    when: "3 months ago",
+  },
 ];
 
 const Reviews = () => (
@@ -39,31 +54,32 @@ const Reviews = () => (
         </div>
       </div>
 
-      <div className="grid md:grid-cols-3 gap-6">
-        {reviews.map((r, i) => (
-          <div
-            key={r.name}
-            className="relative bg-card-gradient rounded-2xl p-8 border border-border/60 shadow-soft hover:shadow-elegant transition-all duration-500 animate-fade-in-up"
-            style={{ animationDelay: `${i * 100}ms` }}
-          >
-            <Quote className="w-10 h-10 text-primary/20 mb-4" />
-            <div className="flex mb-3">
-              {[...Array(5)].map((_, j) => (
-                <Star key={j} className="w-4 h-4 fill-primary text-primary" />
-              ))}
-            </div>
-            <p className="text-foreground/80 leading-relaxed text-sm">{r.text}</p>
-            <div className="mt-6 pt-6 border-t border-border/60 flex items-center gap-3">
-              <div className="w-10 h-10 rounded-full bg-hero-gradient grid place-items-center text-primary-foreground font-semibold">
-                {r.name[0]}
+      <div className="marquee-mask marquee-pause">
+        <div className="marquee-track gap-6 py-4">
+          {[...reviews, ...reviews].map((r, i) => (
+            <div
+              key={i}
+              className="w-[340px] sm:w-[400px] shrink-0 relative bg-card-gradient rounded-2xl p-8 border border-border/60 shadow-soft hover:shadow-elegant hover:-translate-y-1 transition-all duration-500"
+            >
+              <Quote className="w-10 h-10 text-primary/20 mb-4" />
+              <div className="flex mb-3">
+                {[...Array(5)].map((_, j) => (
+                  <Star key={j} className="w-4 h-4 fill-primary text-primary" />
+                ))}
               </div>
-              <div>
-                <div className="font-semibold text-primary-deep">{r.name}</div>
-                <div className="text-xs text-muted-foreground">{r.when}</div>
+              <p className="text-foreground/80 leading-relaxed text-sm line-clamp-6">{r.text}</p>
+              <div className="mt-6 pt-6 border-t border-border/60 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-full bg-hero-gradient grid place-items-center text-primary-foreground font-semibold">
+                  {r.name[0]}
+                </div>
+                <div>
+                  <div className="font-semibold text-primary-deep">{r.name}</div>
+                  <div className="text-xs text-muted-foreground">{r.when}</div>
+                </div>
               </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   </section>

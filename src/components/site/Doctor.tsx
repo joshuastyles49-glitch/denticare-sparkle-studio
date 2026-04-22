@@ -1,22 +1,8 @@
-import { GraduationCap, Stethoscope, Award, Users } from "lucide-react";
-import doctor from "@/assets/doctor.jpg";
+import { GraduationCap, Stethoscope, Award, Users, Sparkles } from "lucide-react";
 
 const Doctor = () => (
   <section id="doctor" className="relative py-24 lg:py-32">
-    <div className="container relative z-10 grid lg:grid-cols-5 gap-12 items-center">
-      <div className="lg:col-span-2 relative animate-scale-in">
-        <div className="absolute -inset-6 bg-hero-gradient rounded-[2rem] blur-3xl opacity-25" />
-        <div className="relative rounded-[2rem] overflow-hidden shadow-elegant">
-          <img
-            src={doctor}
-            alt="Asst. Prof. Dr. Muhammad Omer Siddiqui"
-            loading="lazy"
-            className="w-full h-auto object-cover"
-          />
-        </div>
-      </div>
-
-      <div className="lg:col-span-3 animate-fade-in-up">
+    <div className="container relative z-10 max-w-4xl mx-auto text-center animate-fade-in-up">
         <span className="text-sm font-semibold tracking-widest text-primary uppercase">
           Meet Your Dentist
         </span>
@@ -26,20 +12,19 @@ const Doctor = () => (
         </h2>
         <p className="mt-3 text-primary font-medium">BDS, MHPE · PMDC Verified Dentist</p>
 
-        <p className="mt-5 text-muted-foreground leading-relaxed">
+        <p className="mt-5 text-muted-foreground leading-relaxed max-w-2xl mx-auto">
           With over 16 years of clinical experience, Dr. Omer is renowned for his
           calm, ethical and patient-first approach. His expertise spans cosmetic
           dentistry, implants, root canals and complex restorations — delivered
           with precision and genuine care.
         </p>
 
-        <div className="mt-8 grid sm:grid-cols-2 gap-4">
+        <div className="mt-10 grid sm:grid-cols-2 lg:grid-cols-4 gap-4 text-left">
           <Item icon={GraduationCap} title="BDS, MHPE" sub="Qualified Specialist" />
           <Item icon={Award} title="16+ Years" sub="Clinical Experience" />
           <Item icon={Stethoscope} title="PMDC Verified" sub="Licensed Practitioner" />
           <Item icon={Users} title="1000+ Patients" sub="Treated with Care" />
         </div>
-      </div>
     </div>
   </section>
 );
