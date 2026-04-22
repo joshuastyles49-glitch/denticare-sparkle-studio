@@ -9,17 +9,26 @@ import {
   Activity,
   ShieldCheck,
 } from "lucide-react";
+import whitening from "@/assets/service-whitening.jpg";
+import implants from "@/assets/service-implants.jpg";
+import veneers from "@/assets/service-veneers.jpg";
+import crowns from "@/assets/service-crowns.jpg";
+import rootcanal from "@/assets/service-rootcanal.jpg";
+import scaling from "@/assets/service-scaling.jpg";
+import fillings from "@/assets/service-fillings.jpg";
+import braces from "@/assets/service-braces.jpg";
+import children from "@/assets/service-children.jpg";
 
 const services = [
-  { icon: Sparkles, title: "Teeth Whitening", desc: "Brighten your smile with safe, professional whitening treatments." },
-  { icon: Wrench, title: "Dental Implants", desc: "Permanent, natural-looking tooth replacements that last a lifetime." },
-  { icon: Smile, title: "Veneers", desc: "Custom porcelain veneers for a flawless Hollywood smile." },
-  { icon: Crown, title: "Crowns & Bridges", desc: "Restore strength and aesthetics with premium crowns and bridges." },
-  { icon: Activity, title: "Root Canal Treatment", desc: "Pain-free, modern endodontic care to save your natural teeth." },
-  { icon: ShieldCheck, title: "Scaling & Polishing", desc: "Deep cleaning to keep your gums healthy and teeth shining." },
-  { icon: Stethoscope, title: "Permanent Fillings", desc: "Durable tooth-colored fillings that blend seamlessly." },
-  { icon: Scissors, title: "Braces & Orthodontics", desc: "Straighten teeth with modern braces and aligner solutions." },
-  { icon: Baby, title: "Children Dentistry", desc: "Gentle, friendly paediatric dental care for little smiles." },
+  { icon: Sparkles, image: whitening, title: "Teeth Whitening", desc: "Brighten your smile with safe, professional whitening treatments." },
+  { icon: Wrench, image: implants, title: "Dental Implants", desc: "Permanent, natural-looking tooth replacements that last a lifetime." },
+  { icon: Smile, image: veneers, title: "Veneers", desc: "Custom porcelain veneers for a flawless Hollywood smile." },
+  { icon: Crown, image: crowns, title: "Crowns & Bridges", desc: "Restore strength and aesthetics with premium crowns and bridges." },
+  { icon: Activity, image: rootcanal, title: "Root Canal Treatment", desc: "Pain-free, modern endodontic care to save your natural teeth." },
+  { icon: ShieldCheck, image: scaling, title: "Scaling & Polishing", desc: "Deep cleaning to keep your gums healthy and teeth shining." },
+  { icon: Stethoscope, image: fillings, title: "Permanent Fillings", desc: "Durable tooth-colored fillings that blend seamlessly." },
+  { icon: Scissors, image: braces, title: "Braces & Orthodontics", desc: "Straighten teeth with modern braces and aligner solutions." },
+  { icon: Baby, image: children, title: "Children Dentistry", desc: "Gentle, friendly paediatric dental care for little smiles." },
 ];
 
 const Services = () => (
@@ -43,16 +52,29 @@ const Services = () => (
         {services.map((s, i) => (
           <div
             key={s.title}
-            className="group relative bg-card-gradient rounded-2xl p-8 border border-border/60 shadow-soft hover:shadow-elegant hover:-translate-y-1 transition-all duration-500 animate-fade-in-up"
+            className="group relative bg-card-gradient rounded-2xl overflow-hidden border border-border/60 shadow-soft hover:shadow-elegant hover:-translate-y-2 transition-all duration-500 animate-fade-in-up"
             style={{ animationDelay: `${i * 60}ms` }}
           >
-            <div className="w-14 h-14 rounded-xl bg-hero-gradient grid place-items-center text-primary-foreground shadow-elegant mb-5 group-hover:scale-110 transition-transform duration-500">
-              <s.icon className="w-6 h-6" />
+            <div className="relative h-48 overflow-hidden">
+              <img
+                src={s.image}
+                alt={s.title}
+                loading="lazy"
+                width={768}
+                height={512}
+                className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-primary-deep/70 via-primary-deep/10 to-transparent" />
+              <div className="absolute bottom-3 left-3 w-12 h-12 rounded-xl bg-hero-gradient grid place-items-center text-primary-foreground shadow-elegant group-hover:scale-110 transition-transform duration-500">
+                <s.icon className="w-5 h-5" />
+              </div>
             </div>
-            <h3 className="font-display text-xl font-semibold text-primary-deep mb-2">
-              {s.title}
-            </h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+            <div className="p-6">
+              <h3 className="font-display text-xl font-semibold text-primary-deep mb-2">
+                {s.title}
+              </h3>
+              <p className="text-sm text-muted-foreground leading-relaxed">{s.desc}</p>
+            </div>
           </div>
         ))}
       </div>

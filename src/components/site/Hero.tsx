@@ -1,6 +1,5 @@
 import { Button } from "@/components/ui/button";
-import { Star, ShieldCheck, Award, Sparkles } from "lucide-react";
-import doctor from "@/assets/doctor.jpg";
+import { Star, ShieldCheck, Award, Sparkles, Phone, MapPin, Clock } from "lucide-react";
 
 const Hero = () => {
   return (
@@ -45,32 +44,52 @@ const Hero = () => {
         </div>
 
         <div className="relative animate-scale-in">
-          <div className="absolute -inset-6 bg-hero-gradient rounded-[2.5rem] blur-3xl opacity-30" />
-          <div className="relative rounded-[2rem] overflow-hidden shadow-elegant float-anim">
-            <img
-              src={doctor}
-              alt="Dr. Muhammad Omer Siddiqui, Denticare Dental Clinic"
-              width={1024}
-              height={1024}
-              className="w-full h-auto object-cover"
-            />
-          </div>
-
-          <div className="absolute -bottom-6 -left-6 glass rounded-2xl p-4 shadow-elegant max-w-[220px] animate-fade-in">
-            <div className="flex items-center gap-2 mb-1">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-4 h-4 fill-primary text-primary" />
-              ))}
+          <div className="absolute -inset-10 bg-hero-gradient rounded-[2.5rem] blur-3xl opacity-25" />
+          <div className="relative grid gap-5">
+            <div className="glass rounded-3xl p-8 shadow-elegant float-anim">
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-12 h-12 rounded-2xl bg-hero-gradient grid place-items-center text-primary-foreground shadow-elegant">
+                  <Sparkles className="w-6 h-6" />
+                </div>
+                <div>
+                  <div className="font-display text-xl font-semibold text-primary-deep">
+                    Denticare Clinic
+                  </div>
+                  <div className="text-xs text-muted-foreground">Premium Dental Care</div>
+                </div>
+              </div>
+              <div className="flex items-center gap-2 mb-2">
+                {[...Array(5)].map((_, i) => (
+                  <Star key={i} className="w-4 h-4 fill-primary text-primary" />
+                ))}
+                <span className="ml-1 text-sm font-semibold text-primary-deep">4.7</span>
+                <span className="text-xs text-muted-foreground">· 30 Google Reviews</span>
+              </div>
+              <p className="text-sm text-foreground/80 leading-relaxed">
+                "Truly one of the best dentists I've visited. Painless, professional and gentle."
+              </p>
+              <p className="text-xs text-muted-foreground mt-2">— Hamza Q.</p>
             </div>
-            <p className="text-sm font-medium text-primary-deep">
-              "Truly one of the best dentists I've visited."
-            </p>
-            <p className="text-xs text-muted-foreground mt-1">— Hamza Q.</p>
-          </div>
 
-          <div className="absolute -top-4 -right-4 glass rounded-2xl px-4 py-3 shadow-elegant animate-fade-in">
-            <div className="text-xs text-muted-foreground">Open Today</div>
-            <div className="text-sm font-semibold text-primary-deep">5 PM – 8:30 PM</div>
+            <div className="grid grid-cols-2 gap-5">
+              <div className="glass rounded-3xl p-5 shadow-elegant">
+                <Clock className="w-5 h-5 text-primary mb-2" />
+                <div className="text-xs text-muted-foreground">Open Today</div>
+                <div className="text-sm font-semibold text-primary-deep">5 PM – 8:30 PM</div>
+              </div>
+              <div className="glass rounded-3xl p-5 shadow-elegant">
+                <Phone className="w-5 h-5 text-primary mb-2" />
+                <div className="text-xs text-muted-foreground">Call Us</div>
+                <div className="text-sm font-semibold text-primary-deep">0333 5299143</div>
+              </div>
+              <div className="glass rounded-3xl p-5 shadow-elegant col-span-2">
+                <MapPin className="w-5 h-5 text-primary mb-2" />
+                <div className="text-xs text-muted-foreground">Visit</div>
+                <div className="text-sm font-semibold text-primary-deep">
+                  Options Arcade, Main Road, PWD, Islamabad
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
