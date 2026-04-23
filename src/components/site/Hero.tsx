@@ -5,33 +5,33 @@ const Hero = () => {
   return (
     <section
       id="home"
-      className="relative pt-32 pb-20 lg:pt-40 lg:pb-28 overflow-hidden"
+      className="relative pt-28 pb-16 sm:pt-32 sm:pb-20 lg:pt-40 lg:pb-28 overflow-hidden"
     >
-      <div className="container relative z-10 grid lg:grid-cols-2 gap-12 items-center">
+      <div className="container relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-12 items-center px-4 sm:px-6">
         <div className="animate-fade-in-up">
-          <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full glass shadow-soft mb-6">
+          <div className="inline-flex items-center gap-2 px-3 sm:px-4 py-2 rounded-full glass shadow-soft mb-5 sm:mb-6">
             <Sparkles className="w-4 h-4 text-primary" />
-            <span className="text-sm font-medium text-primary-deep">
+            <span className="text-xs sm:text-sm font-medium text-primary-deep">
               PMDC Verified · 16+ Years Experience
             </span>
           </div>
 
-          <h1 className="font-display text-5xl lg:text-7xl font-semibold leading-[1.05] text-primary-deep">
+          <h1 className="font-display text-4xl sm:text-5xl lg:text-7xl font-semibold leading-[1.08] text-primary-deep">
             Your Smile,{" "}
             <span className="text-gradient">Perfected</span> with Care.
           </h1>
 
-          <p className="mt-6 text-lg text-muted-foreground max-w-xl">
+          <p className="mt-5 sm:mt-6 text-base sm:text-lg text-muted-foreground max-w-xl">
             Premium dental care in Islamabad by Asst. Prof. Dr. Muhammad Omer
             Siddiqui. From cosmetic dentistry to advanced implants — experience
             comfort, precision and a smile you'll love.
           </p>
 
-          <div className="mt-8 flex flex-wrap gap-4">
-            <Button asChild variant="hero" size="xl">
+          <div className="mt-7 sm:mt-8 flex flex-wrap gap-3 sm:gap-4">
+            <Button asChild variant="hero" size="xl" className="w-full sm:w-auto">
               <a href="#book">Book Your Appointment</a>
             </Button>
-            <Button asChild variant="outline" size="xl">
+            <Button asChild variant="outline" size="xl" className="w-full sm:w-auto">
               <a href="#services">Explore Services</a>
             </Button>
           </div>
