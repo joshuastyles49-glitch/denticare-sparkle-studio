@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Menu, X, Phone } from "lucide-react";
+import logo from "@/assets/denticare-logo.png";
 
 const links = [
   { href: "#home", label: "Home" },
@@ -36,8 +37,8 @@ const Navbar = () => {
       >
         <div className="flex items-center justify-between px-4 py-3">
           <a href="#home" className="flex items-center gap-2">
-            <div className="w-10 h-10 rounded-xl bg-hero-gradient grid place-items-center text-primary-foreground font-bold shadow-elegant">
-              D
+            <div className="w-11 h-11 rounded-xl bg-primary-deep grid place-items-center shadow-elegant overflow-hidden">
+              <img src={logo} alt="Denticare Dental Clinic logo" className="w-full h-full object-contain" />
             </div>
             <div className="leading-tight">
               <div className="font-display text-lg font-semibold text-primary-deep">
