@@ -1,4 +1,5 @@
 import { MapPin, Phone, Clock, Instagram, Facebook } from "lucide-react";
+import logo from "@/assets/denticare-logo.png";
 
 const Footer = () => (
   <footer id="contact" className="relative bg-primary-deep text-primary-foreground pt-20 pb-8 overflow-hidden">
@@ -10,8 +11,8 @@ const Footer = () => (
       <div className="grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
           <div className="flex items-center gap-2 mb-4">
-            <div className="w-10 h-10 rounded-xl bg-hero-gradient grid place-items-center font-bold">
-              D
+            <div className="w-11 h-11 rounded-xl bg-white/10 grid place-items-center overflow-hidden">
+              <img src={logo} alt="Denticare Dental Clinic logo" className="w-full h-full object-contain" />
             </div>
             <div className="font-display text-xl font-semibold">Denticare Dental Clinic</div>
           </div>
