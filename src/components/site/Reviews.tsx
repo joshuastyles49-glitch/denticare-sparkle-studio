@@ -1,6 +1,14 @@
-import { Star, Quote } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import { Star, Quote, Send } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { toast } from "@/hooks/use-toast";
+import { z } from "zod";
 
-const reviews = [
+type Review = { name: string; text: string; when: string; rating?: number };
+
+const seedReviews: Review[] = [
   {
     name: "Irum Gilani",
     text: "My experience with Dr Omar has been very good. He is an expert dental surgeon with ethical behaviour which is rare combination. Dr Omar made every effort to make my experience comfortable and satisfying. I strongly recommend him.",
@@ -33,7 +41,75 @@ const reviews = [
   },
 ];
 
-const Reviews = () => (
+const STORAGE_KEY = "denticare_user_reviews";
+
+const reviewSchema = z.object({
+  name: z.string().trim().min(2, "Name must be at least 2 characters").max(60),
+  text: z.string().trim().min(10, "Review must be at least 10 characters").max(800),
+  rating: z.number().int().min(1).max(5),
+});
+
+const shuffle = <T,>(arr: T[]) => {
+  const a = [...arr];
+  for (let i = a.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [a[i], a[j]] = [a[j], a[i]];
+  }
+  return a;
+};
+
+const Reviews = () => {
+  const [userReviews, setUserReviews] = useState<Review[]>([]);
+  const [name, setName] = useState("");
+  const [text, setText] = useState("");
+  const [rating, setRating] = useState(5);
+  const [hover, setHover] = useState(0);
+
+  useEffect(() => {
+    try {
+      const stored = localStorage.getItem(STORAGE_KEY);
+      if (stored) setUserReviews(JSON.parse(stored));
+    } catch {}
+  }, []);
+
+  // Reshuffle every time the page opens / component mounts
+  const displayed = useMemo(
+    () => shuffle([...userReviews, ...seedReviews]),
+    [userReviews]
+  );
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const result = reviewSchema.safeParse({ name, text, rating });
+    if (!result.success) {
+      toast({
+        title: "Please check your review",
+        description: result.error.errors[0]?.message ?? "Invalid input",
+        variant: "destructive",
+      });
+      return;
+    }
+    const newReview: Review = {
+      name: result.data.name,
+      text: result.data.text,
+      rating: result.data.rating,
+      when: "Just now",
+    };
+    const updated = [newReview, ...userReviews];
+    setUserReviews(updated);
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(updated));
+    } catch {}
+    setName("");
+    setText("");
+    setRating(5);
+    toast({
+      title: "Thank you! 🎉",
+      description: "Your review has been added.",
+    });
+  };
+
+  return (
   <section id="reviews" className="relative py-24 lg:py-32 bg-soft-gradient overflow-hidden">
     <div className="container relative z-10">
       <div className="text-center max-w-2xl mx-auto mb-16">
@@ -56,14 +132,14 @@ const Reviews = () => (
 
       <div className="marquee-mask marquee-pause">
         <div className="marquee-track gap-6 py-4">
-          {[...reviews, ...reviews].map((r, i) => (
+          {[...displayed, ...displayed].map((r, i) => (
             <div
               key={i}
               className="w-[340px] sm:w-[400px] shrink-0 relative bg-card-gradient rounded-2xl p-8 border border-border/60 shadow-soft hover:shadow-elegant hover:-translate-y-1 transition-all duration-500"
             >
               <Quote className="w-10 h-10 text-primary/20 mb-4" />
               <div className="flex mb-3">
-                {[...Array(5)].map((_, j) => (
+                {[...Array(r.rating ?? 5)].map((_, j) => (
                   <Star key={j} className="w-4 h-4 fill-primary text-primary" />
                 ))}
               </div>
@@ -81,8 +157,91 @@ const Reviews = () => (
           ))}
         </div>
       </div>
+
+      {/* Write a review */}
+      <div className="mt-20 max-w-2xl mx-auto">
+        <div className="text-center mb-8">
+          <span className="text-sm font-semibold tracking-widest text-primary uppercase">
+            Share Your Experience
+          </span>
+          <h3 className="font-display text-3xl lg:text-4xl font-semibold mt-3 text-primary-deep">
+            Write a <span className="text-gradient">Review</span>
+          </h3>
+          <p className="mt-3 text-muted-foreground">
+            We'd love to hear about your visit to Denticare.
+          </p>
+        </div>
+
+        <form
+          onSubmit={handleSubmit}
+          className="bg-card-gradient rounded-2xl p-6 sm:p-8 border border-border/60 shadow-soft space-y-5"
+        >
+          <div>
+            <label className="text-sm font-medium text-primary-deep mb-2 block">
+              Your Name
+            </label>
+            <Input
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="e.g. Ayesha Khan"
+              maxLength={60}
+              required
+            />
+          </div>
+
+          <div>
+            <label className="text-sm font-medium text-primary-deep mb-2 block">
+              Rating
+            </label>
+            <div className="flex gap-1">
+              {[1, 2, 3, 4, 5].map((n) => (
+                <button
+                  key={n}
+                  type="button"
+                  onClick={() => setRating(n)}
+                  onMouseEnter={() => setHover(n)}
+                  onMouseLeave={() => setHover(0)}
+                  className="p-1 transition-transform hover:scale-110"
+                  aria-label={`${n} star${n > 1 ? "s" : ""}`}
+                >
+                  <Star
+                    className={`w-7 h-7 transition-colors ${
+                      n <= (hover || rating)
+                        ? "fill-primary text-primary"
+                        : "text-muted-foreground/40"
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+          </div>
+
+          <div>
+            <label className="text-sm font-medium text-primary-deep mb-2 block">
+              Your Review
+            </label>
+            <Textarea
+              value={text}
+              onChange={(e) => setText(e.target.value)}
+              placeholder="Tell us about your experience..."
+              rows={4}
+              maxLength={800}
+              required
+            />
+            <div className="text-xs text-muted-foreground mt-1 text-right">
+              {text.length}/800
+            </div>
+          </div>
+
+          <Button type="submit" variant="hero" size="lg" className="w-full">
+            <Send className="w-4 h-4 mr-2" />
+            Submit Review
+          </Button>
+        </form>
+      </div>
     </div>
   </section>
-);
+  );
+};
 
 export default Reviews;
