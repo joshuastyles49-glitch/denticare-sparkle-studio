@@ -10,11 +10,12 @@ const Footer = () => (
     <div className="container relative z-10">
       <div className="grid md:grid-cols-4 gap-10">
         <div className="md:col-span-2">
-          <div className="flex items-center gap-2 mb-4">
-            <div className="w-11 h-11 rounded-xl bg-white/10 grid place-items-center overflow-hidden">
-              <img src={logo} alt="Denticare Dental Clinic logo" className="w-full h-full object-contain" />
-            </div>
-            <div className="font-display text-xl font-semibold">Denticare Dental Clinic</div>
+          <div className="mb-4">
+            <img
+              src={logo}
+              alt="Denticare Dental Clinic logo"
+              className="h-16 w-auto object-contain brightness-0 invert"
+            />
           </div>
           <p className="text-primary-foreground/70 max-w-md leading-relaxed">
             Premium dental care in Islamabad — led by Asst. Prof. Dr. Muhammad

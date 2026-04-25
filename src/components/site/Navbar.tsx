@@ -7,7 +7,7 @@ const links = [
   { href: "#home", label: "Home" },
   { href: "#services", label: "Services" },
   { href: "#about", label: "About" },
-  { href: "#doctor", label: "Doctor" },
+  { href: "#doctor", label: "Dentists" },
   { href: "#reviews", label: "Reviews" },
   { href: "#contact", label: "Contact" },
 ];
@@ -36,18 +36,12 @@ const Navbar = () => {
         }`}
       >
         <div className="flex items-center justify-between px-4 py-3">
-          <a href="#home" className="flex items-center gap-2">
-            <div className="w-11 h-11 rounded-xl bg-primary-deep grid place-items-center shadow-elegant overflow-hidden">
-              <img src={logo} alt="Denticare Dental Clinic logo" className="w-full h-full object-contain" />
-            </div>
-            <div className="leading-tight">
-              <div className="font-display text-lg font-semibold text-primary-deep">
-                Denticare
-              </div>
-              <div className="text-[11px] uppercase tracking-widest text-muted-foreground">
-                Dental Clinic
-              </div>
-            </div>
+          <a href="#home" className="flex items-center" aria-label="Denticare Dental Clinic — Home">
+            <img
+              src={logo}
+              alt="Denticare Dental Clinic logo"
+              className="h-12 sm:h-14 w-auto object-contain"
+            />
           </a>
 
           <nav className="hidden lg:flex items-center gap-8">
